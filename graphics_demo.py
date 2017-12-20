@@ -27,6 +27,9 @@ BLACK = (0, 0, 0)
 ORANGE = (255, 125 , 0)
 SKY = (170, 255, 250)
 REDD = (255, 0, 1)
+BROWN = (122, 44, 4)
+BROWNNN = (122, 44, 0)
+
     
 
 # Game loop
@@ -45,14 +48,21 @@ while not done:
 
     # Drawing code (Describe the picture. It isn't actually drawn yet.)
     screen.fill(SKY)
-    pygame.draw.rect(screen, BLUE, [250, 250, 400, 300])
-    pygame.draw.ellipse(screen, BLUE, [100, 100, 300, 300])
-    pygame.draw.ellipse(screen, BLACK, [200, 200, 100, 100])
-    pygame.draw.polygon(screen, BLUE, [[200, 200], [50,400], [600, 500]])
+    pygame.draw.rect(screen, GREEN, [0, 400, 1000, 300])
+    pygame.draw.rect(screen, BROWN, [200, 200, 100, 200])
+    pygame.draw.arc(screen, GREEN, [100, 100, 100, 100], 0, math.pi/2, 50)
+
+
+
+
+    '''
+    pygame.draw.ellipse(screen, WHITE, [25, 25, 450, 450])
+    pygame.draw.ellipse(screen, WHITE, [100, 100, 300, 300])
+    pygame.draw.ellipse(screen, WHITE, [200, 200, 100, 100])
+    '''
 
     ''' angles for arcs are measured in radians (a pre-cal topic) '''
-    pygame.draw.arc(screen, ORANGE, [100, 100, 100, 100], 0, math.pi/2, 1)
-    pygame.draw.arc(screen, ORANGE, [100, 100, 100, 100], 0, math.pi/2, 50)
+    pygame.draw.arc(screen, ORANGE, [700, 25, 100, 800], 0, math.pi/2, 50)
 
 
     # Update screen (Actually draw the picture in the window.)

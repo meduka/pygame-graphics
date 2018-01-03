@@ -25,12 +25,21 @@ BLUE = (0, 0, 255)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 ORANGE = (255, 125 , 0)
-SKY = (170, 255, 250)
+SKY = (24, 56, 107)
 REDD = (255, 0, 1)
 BROWN = (122, 44, 4)
 BROWNNN = (122, 44, 0)
+YELLOW = (255, 255, 175)
 
-    
+
+def draw_cloud(x, y):
+    pygame.draw.ellipse(screen, WHITE, [x, y + 20, 40 , 40])
+    pygame.draw.ellipse(screen, WHITE, [x + 60, y + 20, 40 , 40])
+    pygame.draw.ellipse(screen, WHITE, [x + 20, y + 10, 25, 25])
+    pygame.draw.ellipse(screen, WHITE, [x + 35, y, 50, 50])
+    pygame.draw.rect(screen, WHITE, [x + 20, y + 20, 60, 40])
+
+
 
 # Game loop
 done = False
@@ -52,6 +61,19 @@ while not done:
     pygame.draw.rect(screen, BROWN, [200, 200, 100, 200])
     pygame.draw.arc(screen, GREEN, [100, 100, 100, 100], 0, math.pi/2, 50)
 
+    ''' sun '''
+    pygame.draw.ellipse(screen, YELLOW, [575, 75, 100, 100])
+
+ 
+    '''clouds'''
+    draw_cloud(50, 150)
+    draw_cloud(250, 75)
+    draw_cloud(250, 75)
+    draw_cloud(250, 75)
+    draw_cloud(250, 75)
+    draw_cloud(250, 75)
+    draw_cloud(640, 90)
+    draw_cloud(400, 200)
 
 
 

@@ -20,12 +20,12 @@ refresh_rate = 60
 
 # Colors
 RED = (255, 0, 0)
-GREEN = (0, 255, 0)
+GREEN = (19, 119, 32)
 BLUE = (0, 0, 255)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 ORANGE = (255, 125 , 0)
-SKY = (24, 56, 107)
+SKY = (4, 18, 40)
 REDD = (255, 0, 1)
 BROWN = (122, 44, 4)
 BROWNNN = (122, 44, 0)
@@ -58,8 +58,14 @@ while not done:
     # Drawing code (Describe the picture. It isn't actually drawn yet.)
     screen.fill(SKY)
     pygame.draw.rect(screen, GREEN, [0, 400, 1000, 300])
+
+    '''
     pygame.draw.rect(screen, BROWN, [200, 200, 100, 200])
+    
+    
     pygame.draw.arc(screen, GREEN, [100, 100, 100, 100], 0, math.pi/2, 50)
+
+    '''
 
     ''' sun '''
     pygame.draw.ellipse(screen, YELLOW, [575, 75, 100, 100])
@@ -74,6 +80,16 @@ while not done:
     draw_cloud(250, 75)
     draw_cloud(640, 90)
     draw_cloud(400, 200)
+
+    '''train'''
+    y = 360
+    for x in range(5, 600, 90):
+        post = [[x+20, y+20], [x+40, y+20], [x+40, y+160], [x, y+160], [x, y+20]]
+        pygame.draw.polygon(screen, WHITE, post)
+
+    pygame.draw.rect(screen, WHITE, [0, y+10, 800, 5])
+    pygame.draw.rect(screen, WHITE, [0, y+30, 800, 5])
+
 
 
 

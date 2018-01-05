@@ -52,8 +52,8 @@ for i in range(200):
     r = random.randrange(1, 5)
     stars.append([x, y, r, r,])
 
-
-
+def draw_bird(x, y):
+    for b in bird:
 
 # Game loop
 done = False

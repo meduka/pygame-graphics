@@ -53,7 +53,11 @@ for i in range(200):
     stars.append([x, y, r, r,])
 
 def draw_bird(x, y):
-    for b in bird:
+    pygame.draw.ellipse(screen, RED, [x, y + 20, 10 , 10])
+    pygame.draw.arc(screen, RED, [50, 50, 50, 50], 0, math.pi/2, 10)
+'''
+def draw_tree(x, y):
+'''
 
 # Game loop
 done = False
@@ -99,6 +103,8 @@ while not done:
     draw_cloud(640, 90)
     draw_cloud(400, 200)
 
+
+    draw_bird(50, 200)
     '''train'''
     y = 360
     for x in range(5, 600, 90):

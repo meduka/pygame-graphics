@@ -32,7 +32,7 @@ STARS = (193, 238, 255)
 # Make clouds
 
 
-num_clouds = 20
+num_clouds = 50
 clouds = []
 for i in range(num_clouds):
     x = random.randrange(0, 1600)
@@ -55,8 +55,7 @@ def draw_cloud(loc):
 
     
 def make_rain(r):
-    for r in rain:
-        pygame.draw.ellipse(screen, STARS, r)
+    pygame.draw.ellipse(screen, STARS, r)
 
 rain = []
 for i in range(800):
@@ -89,10 +88,12 @@ while not done:
 
     for n in rain:
         n[1] += 10
+        n[0] += 2
+
 
         if n[1] > 800:
-           n[0] = random.randrange(-10, 810)
-           n[1] = random.randrange(-50, -900,-150)
+           n[0] = random.randrange(-1600, -10)
+           n[1] = random.randrange(-500, -50)
 
 
 

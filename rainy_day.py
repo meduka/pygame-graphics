@@ -24,13 +24,15 @@ refresh_rate = 30
 # Colors
 GREEN = (0, 175, 0)
 WHITE = (255, 255, 255)
-BLUE = (176, 177, 178)
+BLUE = (75, 200, 255)
 YELLOW = (255, 255, 175)
 STARS = (193, 238, 255)
+GRAY = (116, 122, 132)
 
 
 # Make clouds
 
+daytime = True
 
 num_clouds = 50
 clouds = []
@@ -76,6 +78,9 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True     
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                daytime = not daytime
     
     # Game logic
     for c in clouds:
@@ -84,27 +89,36 @@ while not done:
         if c[0] > 900:
            c[0] = random.randrange(-1600, -100)
            c[1] = random.randrange(-50, 200)
+           
+    ''' set sky color '''
+    if daytime:
+        sky = BLUE
+        cloud_color = WHITE
+    else:
+        sky = GRAY
+        cloud_color = GRAY
 
 
+ 
     for n in rain:
         n[1] += 10
         n[0] += 2
 
 
         if n[1] > 800:
-           n[0] = random.randrange(-1600, -10)
+           n[0] = random.randrange(-1600, 1600)
            n[1] = random.randrange(-500, -50)
 
 
 
     # Drawing code
     ''' sky '''
-    screen.fill(BLUE)
+    screen.fill(sky)
 
     ''' grass '''
     pygame.draw.rect(screen, GREEN, [0, 400, 800, 200])
     
-    '''stars'''
+    '''rain'''
     for n in rain:
         make_rain(n)
 

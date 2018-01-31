@@ -23,10 +23,11 @@ refresh_rate = 60
 
 # Colors
 GREEN = (100, 125, 75)
+LIGHTER_GREEN = (13, 193, 34)
 WHITE = (255, 255, 255)
 OFF_WHITE = (234, 237, 239)
 BLUE = (75, 200, 255)
-DARK_BLUE = (0, 0, 100)
+DARK_BLUE = (15, 92, 216)
 GRAY = (150, 150, 150)
 DARK_GRAY = (75, 75, 75)
 NOT_QUITE_DARK_GRAY = (100, 100, 100)
@@ -66,7 +67,7 @@ far_clouds = []
 for i in range(num_clouds):
     x = random.randrange(0, 1600)
     y = random.randrange(-50, 300)
-    loc = [x, y]
+    loc =  [x, y]
     far_clouds.append(loc)
 
 ''' Make rain '''
@@ -119,8 +120,12 @@ while not done:
         sky = BLUE
         near_cloud_color = WHITE
         far_cloud_color = OFF_WHITE
+        grass_color = LIGHTER_GREEN
     else:
         sky = GRAY
+        near_cloud_color = NOT_QUITE_DARK_GRAY
+        far_cloud_color = DARK_GRAY
+        grass_color = GREEN
 
 
     ''' move rain '''
@@ -150,7 +155,7 @@ while not done:
     #pygame.draw.ellipse(screen, YELLOW, [575, 75, 100, 100])
 
     ''' grass '''
-    pygame.draw.rect(screen, GREEN, [0, 400, 800, 200])
+    pygame.draw.rect(screen, grass_color, [0, 400, 800, 200])
 
     ''' fence '''
     y = 380

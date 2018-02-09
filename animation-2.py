@@ -19,7 +19,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 #image
-window = pygame.image.load('window1.png')
+window = pygame.image.load('window_600.png')
 # Block
 loc = [380, 280]
 vel = [0, 0]

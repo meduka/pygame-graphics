@@ -30,18 +30,29 @@ YELLOW = (200, 200, 100)
 
 
 #image
-window = pygame.image.load('window1.png')
+bird1 = pygame.image.load('frame-1.png')
+bird2 = pygame.image.load('frame-2.png')
+bird3 = pygame.image.load('frame-3.png')
+bird4 = pygame.image.load('frame-4.png')
+bird5 = pygame.image.load('frame-5.png')
+bird6 = pygame.image.load('frame-6.png')
+bird7 = pygame.image.load('frame-7.png')
+bird8 = pygame.image.load('frame-8.png')
+
+flying_bird = [bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8]
 
 
 # Settings
 stormy = True
 daytime = False
 
+frame = 0
+
 
 def draw_block(loc):
     x = loc[0]
     y = loc[1]
-    screen.blit(window,(x, y, 0, 0))
+    screen.blit(flying_bird[frame],(x, y, 40, 40))
 
 def draw_cloud(loc, color):
     x = loc[0]
@@ -185,7 +196,9 @@ while not done:
     ''' clouds '''
     for c in near_clouds:
         draw_cloud(c, far_cloud_color)
+    ''' character '''
 
+    draw_block(loc)
 
     # Update screen
     pygame.display.flip()

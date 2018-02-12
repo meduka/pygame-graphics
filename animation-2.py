@@ -19,20 +19,32 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 #image
-window = pygame.image.load('window_600.png')
+birb1 = pygame.image.load('birb1.png')
+birb2 = pygame.image.load('birb2.png')
+birb3 = pygame.image.load('birb3.png')
+
+
+flying_bird = [birb1, birb2, birb3]
+
+
 # Block
 loc = [380, 280]
 vel = [0, 0]
 speed = 5
 
-def draw_block(loc):
+def draw_block(loc, frame):
     x = loc[0]
     y = loc[1]
-    screen.blit(window,(x, y, 40, 40))
+    screen.blit(flying_bird[frame],(x, y))
+
     
 # Game loop
 done = False
 
+ticks = 0
+frame = 0
+
+'''
 while not done:
     # Event processing
     for event in pygame.event.get():
@@ -55,15 +67,23 @@ while not done:
             elif event.key == pygame.K_UP:
                 vel[1] = 0
             elif event.key == pygame.K_DOWN:
-                vel[1] = 0
-                                
+                vel[1] = 0'''
+
     # Game logic
     loc[0] += vel[0]
     loc[1] += vel[1]
-    
+
+
+    ticks += 1
+
+    if ticks%20 == 0:
+        frame += 1
+        if frame > 0:
+            frame = 0
+            
     # Drawing code
     screen.fill(BLACK)
-    draw_block(loc)
+    draw_block(loc, frame)
 
 
     # Update screen

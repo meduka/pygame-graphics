@@ -26,33 +26,29 @@ DARK_BLUE = (15, 92, 216)
 GRAY = (150, 150, 150)
 DARK_GRAY = (75, 75, 75)
 NOT_QUITE_DARK_GRAY = (100, 100, 100)
-YELLOW = (200, 200, 100)
+YELLOW = (244, 232, 66)
+BLACK = (0, 0, 0)
 
 
 #image
-bird1 = pygame.image.load('frame-1.png')
-bird2 = pygame.image.load('frame-2.png')
-bird3 = pygame.image.load('frame-3.png')
-bird4 = pygame.image.load('frame-4.png')
-bird5 = pygame.image.load('frame-5.png')
-bird6 = pygame.image.load('frame-6.png')
-bird7 = pygame.image.load('frame-7.png')
-bird8 = pygame.image.load('frame-8.png')
-
-flying_bird = [bird1, bird2, bird3, bird4, bird5, bird6, bird7, bird8]
+birbflap1 = pygame.image.load('bird1.png')
 
 
 # Settings
 stormy = True
 daytime = False
+blackout = False
+
 
 frame = 0
 
 
-def draw_block(loc):
-    x = loc[0]
-    y = loc[1]
-    screen.blit(flying_bird[frame],(x, y, 40, 40))
+def draw_birds(fly):
+    x = fly[0]
+    y = fly[1]
+    
+    screen.blit(birbflap1,(x, y))
+
 
 def draw_cloud(loc, color):
     x = loc[0]
@@ -82,7 +78,7 @@ num_clouds = 50
 far_clouds = []
 
 for i in range(num_clouds):
-    x = random.randrange(0, 1600)
+    x = random.randrange(0, 1000)
     y = random.randrange(-50, 300)
     loc =  [x, y]
     far_clouds.append(loc)
@@ -92,14 +88,24 @@ for i in range(num_clouds):
 num_drops = 700
 rain = []
 
-if not stormy:
-    for i in range(num_drops):
-        x = random.randrange(0, 1000)
-        y = random.randrange(-100, 600)
-        r = random.randrange(1, 5)
-        stop = random.randrange(400, 700)
-        drop = [x, y, r, r, stop]
-        rain.append(drop)
+for i in range(num_drops):
+    x = random.randrange(0, 1000)
+    y = random.randrange(-100, 600)
+    r = random.randrange(1, 5)
+    stop = random.randrange(400, 700)
+    drop = [x, y, r, r, stop]
+    rain.append(drop)
+
+''' Make birds '''
+
+num_birds = 10
+fly_bird = []
+
+for i in range(num_birds):
+    x = random.randrange(0, 1000)
+    y = random.randrange(-50, 300)
+    fly =  [x, y]
+    fly_bird.append(fly)
 
 
 lightning_timer = 0
@@ -113,25 +119,52 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.KEYDOWN:
+
             if event.key == pygame.K_SPACE:
                 daytime = not daytime
                 stormy = not stormy
 
+            if event.key == pygame.K_x:
+                blackout = not blackout
+
+        pressed = pygame.key.get_pressed()
+        
+        reverse = pressed[pygame.K_BACKSPACE]
+
     # Game logic
     ''' move clouds '''
     for c in far_clouds:
-        c[0] -= 1
+        if not reverse:
+            c[0] -= 1
+        elif reverse:
+            c[0] += 1
 
         if c[0] < -100:
             c[0] = random.randrange(800, 1600)
             c[1] = random.randrange(-50, 200)
 
     for c in near_clouds:
-        c[0] -= 2
+        if not reverse:
+            c[0] -= 2
+        elif reverse:
+            c[0] += 2
 
         if c[0] < -100:
             c[0] = random.randrange(800, 1600)
             c[1] = random.randrange(-50, 200)
+            
+    '''move birds'''
+
+    for b in fly_bird:
+        if not reverse:
+           b[0] -= 1
+        elif reverse:
+            b[0] += 1
+
+        if b[0] < -100:
+            b[0] = random.randrange(800, 1600)
+            b[1] = random.randrange(-50, 200)
+
 
             
     ''' set sky color '''
@@ -149,8 +182,14 @@ while not done:
 
     ''' move rain '''
     for r in rain:
-        r[0] -= 1
-        r[1] += 4
+        
+        if not reverse:
+            r[0] -= 1
+            r[1] += 4
+            
+        elif reverse:
+            r[0] += 1
+            r[1] -= 4
 
         if r[1] > r[4]:
             r[0] = random.randrange(0, 1000)
@@ -171,7 +210,8 @@ while not done:
         screen.fill(sky)
 
     ''' sun '''
-    #pygame.draw.ellipse(screen, YELLOW, [575, 75, 100, 100])
+    if not stormy:
+        pygame.draw.ellipse(screen, YELLOW, [575, 75, 100, 100])
 
     ''' grass '''
     pygame.draw.rect(screen, grass_color, [0, 400, 800, 200])
@@ -189,16 +229,26 @@ while not done:
     for c in far_clouds:
         draw_cloud(c, near_cloud_color)
 
-    ''' rain ''' 
-    for r in rain:
-        draw_raindrop(r)
+    ''' rain '''
+    if stormy:
+        for r in rain:
+            draw_raindrop(r)
 
     ''' clouds '''
     for c in near_clouds:
         draw_cloud(c, far_cloud_color)
+        
     ''' character '''
+    
+    if not stormy:
+        for b in fly_bird:
+            draw_birds(b)
 
-    draw_block(loc)
+    ''' blackout'''
+
+    if blackout:
+        pygame.draw.rect(screen, BLACK, [0, 0, 800, 600])
+
 
     # Update screen
     pygame.display.flip()
